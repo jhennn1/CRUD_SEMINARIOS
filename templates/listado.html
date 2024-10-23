@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listado de Inscritos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <h1>Listado de Inscritos</h1>
+
+    <a href="/nuevo" style="left: 50%; background-color: #31a2d6;">Nuevo</a>
+
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Turno</th>
+            <th>Seminarios</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inscrito in inscritos %}
+            <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ inscrito.fecha }}</td>
+              <td>{{ inscrito.nombre }}</td>
+              <td>{{ inscrito.apellidos }}</td>
+              <td>{{ inscrito.turno }}</td>
+              <td>{{ inscrito.seminarios }}</td>
+              <td>
+                <a href="/editar/{{ loop.index - 1 }}" style="background-color: #3d81e7;">Editar</a>
+                <a href="/eliminar/{{ loop.index - 1 }}" style="background-color: #f84f00;">Eliminar</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

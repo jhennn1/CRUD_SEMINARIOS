@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Inscrito</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Editar Inscrito</h1>
+
+    <div class="container">
+        <form action="/editar/{{ id }}" method="POST"> 
+            <div class="datos">
+                <h2>Datos</h2>
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" value="{{ contacto.fecha }}"> 
+                <br>
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" value="{{ contacto.nombre }}"> 
+                <br>
+
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" value="{{ contacto.apellidos }}"> 
+                <br>
+
+                <label for="turno">Turno:</label>
+                <div class="radio-group">
+                    <input type="radio" id="manana" name="turno" value="Mañana" {% if contacto.turno == 'Mañana' %}checked{% endif %}> 
+                    <label for="manana">Mañana</label>
+
+                    <input type="radio" id="tarde" name="turno" value="Tarde" {% if contacto.turno == 'Tarde' %}checked{% endif %}> 
+                    <label for="tarde">Tarde</label>
+
+                    <input type="radio" id="noche" name="turno" value="Noche" {% if contacto.turno == 'Noche' %}checked{% endif %}> 
+                    <label for="noche">Noche</label>
+                </div>
+            </div>
+
+            <div class="seminarios">
+                <h2>Seminarios disponibles</h2>
+                <div class="checkbox-group">
+                    {% set selected_seminarios = contacto.seminarios.split('; ') %} 
+                    <input type="checkbox" id="ia" name="seminarios[]" value="Inteligencia Artificial" {% if 'Inteligencia Artificial' in selected_seminarios %}checked{% endif %}>
+                    <label for="ia">Inteligencia Artificial</label>
+                    <br>
+
+                    <input type="checkbox" id="ml" name="seminarios[]" value="Machine Learning" {% if 'Machine Learning' in selected_seminarios %}checked{% endif %}>
+                    <label for="ml">Machine Learning</label>
+                    <br>
+
+                    <input type="checkbox" id="simulacion" name="seminarios[]" value="Simulación con Arena" {% if 'Simulación con Arena' in selected_seminarios %}checked{% endif %}>
+                    <label for="simulacion">Simulación con Arena</label>
+                    <br>
+
+                    <input type="checkbox" id="robotica" name="seminarios[]" value="Robótica Educativa" {% if 'Robótica Educativa' in selected_seminarios %}checked{% endif %}>
+                    <label for="robotica">Robótica Educativa</label>
+                </div>
+            </div>
+            <button type="submit">Guardar cambios</button>
+        </form>
+    </div>
+</body>
+</html>
